@@ -76,4 +76,53 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.put("/:id", async (req, res) => {
+  try {
+    const { name, path, content, language } = req.body;
+
+    const updatedFile = await File.findByIdAndUpdate(
+      req.params.id,
+      {
+        ...(name !== undefined && { name }),
+        ...(path !== undefined && { path }),
+        ...(content !== undefined && { content }),
+        ...(language !== undefined && { language }),
+      },
+      { new: true }
+    );
+
+    if (!updatedFile) {
+      return res.status(404).json({
+        message: "File not found",
+      });
+    }
+
+    res.json(updatedFile);
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to update file",
+      error: error.message,
+    });
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const deletedFile = await File.findByIdAndDelete(req.params.id);
+
+    if (!deletedFile) {
+      return res.status(404).json({
+        message: "File not found",
+      });
+    }
+
+    res.json({ message: "File deleted successfully" });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to delete file",
+      error: error.message,
+    });
+  }
+});
+
 module.exports = router;

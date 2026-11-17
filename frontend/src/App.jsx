@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import Landing from "./pages/Landing";
 import RepositoryOverview from "./pages/RepositoryOverview";
 import FileView from "./pages/FileView";
+import CodeEditor from "./pages/CodeEditor";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/repository/:id" element={<RepositoryOverview />} />
         <Route path="/repository/:id/file/:fileId" element={<FileView />}/>
+        <Route path="/repository/:id/ide" element={<CodeEditor />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

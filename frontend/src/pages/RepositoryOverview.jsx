@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import { supabase } from "../supabase";
 import "./RepositoryOverview.css";
 
@@ -10,7 +15,10 @@ export default function RepositoryOverview() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const getInitialTab = () => {
-    if (searchParams.get("tab") === "files" || location.state?.tab === "Files") {
+    if (
+      searchParams.get("tab") === "files" ||
+      location.state?.tab === "Files"
+    ) {
       return "Files";
     }
     return "Overview";
@@ -35,7 +43,10 @@ export default function RepositoryOverview() {
   const [savingFile, setSavingFile] = useState(false);
 
   useEffect(() => {
-    if (searchParams.get("tab") === "files" || location.state?.tab === "Files") {
+    if (
+      searchParams.get("tab") === "files" ||
+      location.state?.tab === "Files"
+    ) {
       setActiveTab("Files");
     }
   }, [searchParams, location.state]);
@@ -63,7 +74,7 @@ export default function RepositoryOverview() {
         }
 
         const response = await fetch(
-          `http://localhost:5000/api/repositories/${id}`
+          `http://localhost:5000/api/repositories/${id}`,
         );
         const data = await response.json();
 
@@ -93,7 +104,7 @@ export default function RepositoryOverview() {
       setFilesLoading(true);
       setFileError("");
       const response = await fetch(
-        `http://localhost:5000/api/files/repository/${id}`
+        `http://localhost:5000/api/files/repository/${id}`,
       );
       const data = await response.json();
 
@@ -185,7 +196,7 @@ export default function RepositoryOverview() {
       day: "2-digit",
       month: "short",
       year: "numeric",
-    }
+    },
   );
 
   return (
@@ -213,7 +224,9 @@ export default function RepositoryOverview() {
         <div className="repo-breadcrumb">
           <button onClick={() => navigate("/dashboard")}>Workspace</button>
           <span>/</span>
-          <button onClick={() => navigate("/dashboard")}>My Repositories</button>
+          <button onClick={() => navigate("/dashboard")}>
+            My Repositories
+          </button>
           <span>/</span>
           <strong>{repository.name}</strong>
         </div>
@@ -303,12 +316,24 @@ export default function RepositoryOverview() {
                 <div className="wave-graph-box">
                   <svg viewBox="0 0 600 110" className="wave-svg">
                     <defs>
-                      <linearGradient id="neonLine" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <linearGradient
+                        id="neonLine"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="0%"
+                      >
                         <stop offset="0%" stopColor="#8b5cf6" />
                         <stop offset="50%" stopColor="#06b6d4" />
                         <stop offset="100%" stopColor="#3b82f6" />
                       </linearGradient>
-                      <linearGradient id="neonArea" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <linearGradient
+                        id="neonArea"
+                        x1="0%"
+                        y1="0%"
+                        x2="0%"
+                        y2="100%"
+                      >
                         <stop offset="0%" stopColor="rgba(6, 182, 212, 0.35)" />
                         <stop offset="100%" stopColor="rgba(6, 182, 212, 0)" />
                       </linearGradient>
@@ -324,10 +349,34 @@ export default function RepositoryOverview() {
                       strokeWidth="3"
                       className="glowing-stroke"
                     />
-                    <circle cx="100" cy="70" r="4" fill="#fff" className="node-dot" />
-                    <circle cx="200" cy="50" r="4" fill="#fff" className="node-dot" />
-                    <circle cx="400" cy="30" r="4" fill="#fff" className="node-dot" />
-                    <circle cx="500" cy="75" r="4" fill="#fff" className="node-dot" />
+                    <circle
+                      cx="100"
+                      cy="70"
+                      r="4"
+                      fill="#fff"
+                      className="node-dot"
+                    />
+                    <circle
+                      cx="200"
+                      cy="50"
+                      r="4"
+                      fill="#fff"
+                      className="node-dot"
+                    />
+                    <circle
+                      cx="400"
+                      cy="30"
+                      r="4"
+                      fill="#fff"
+                      className="node-dot"
+                    />
+                    <circle
+                      cx="500"
+                      cy="75"
+                      r="4"
+                      fill="#fff"
+                      className="node-dot"
+                    />
                   </svg>
                   <div className="branch-overlay">
                     <span>Default Branch</span>
@@ -396,7 +445,7 @@ export default function RepositoryOverview() {
               <div className="repo-panel quick-actions">
                 <h2>Quick Actions</h2>
 
-                <button onClick={() => handleTabChange("Files")}>
+                <button onClick={() => navigate(`/repository/${id}/ide`)}>
                   <span className="qa-icon purple-icon">⌘</span>
                   <div>
                     <strong>Open in IDE</strong>
@@ -444,14 +493,18 @@ export default function RepositoryOverview() {
                   <div className="feed-item">
                     <span className="feed-dot cyan"></span>
                     <div>
-                      <p>Workspace initialized by <strong>Nishit</strong></p>
+                      <p>
+                        Workspace initialized by <strong>Nishit</strong>
+                      </p>
                       <small>Just now</small>
                     </div>
                   </div>
                   <div className="feed-item">
                     <span className="feed-dot purple"></span>
                     <div>
-                      <p>Branch <strong>main</strong> created</p>
+                      <p>
+                        Branch <strong>main</strong> created
+                      </p>
                       <small>{createdDate}</small>
                     </div>
                   </div>
@@ -568,9 +621,7 @@ export default function RepositoryOverview() {
                 <div className="files-empty">
                   <div className="empty-folder-icon">📁</div>
                   <h3>No files yet</h3>
-                  <p>
-                    Add your first file to start building this repository.
-                  </p>
+                  <p>Add your first file to start building this repository.</p>
                   <button
                     className="add-file-button"
                     onClick={() => setShowAddFile(true)}
@@ -590,15 +641,15 @@ export default function RepositoryOverview() {
                     <div
                       className="file-row"
                       key={file._id}
-                      onClick={() => navigate(`/repository/${id}/file/${file._id}`)}
+                      onClick={() =>
+                        navigate(`/repository/${id}/file/${file._id}`)
+                      }
                       style={{ cursor: "pointer" }}
                     >
                       <div className="file-name-cell">
                         <span className="file-icon">📄</span>
                         <strong>
-                          {file.path
-                            ? `${file.path}/${file.name}`
-                            : file.name}
+                          {file.path ? `${file.path}/${file.name}` : file.name}
                         </strong>
                       </div>
                       <span className="lang-tag">
