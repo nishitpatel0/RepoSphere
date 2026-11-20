@@ -497,3 +497,43 @@ body {
   cursor: pointer;
   box-shadow: 0 4px 14px rgba(139, 92, 246, 0.4);
 }
+
+
+
+.edit-btn {
+  border-color: rgba(34, 197, 94, 0.4);
+}
+
+.save-btn {
+  border-color: rgba(34, 197, 94, 0.5);
+}
+
+.cancel-btn {
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.file-code-editor {
+  width: 100%;
+  min-height: 500px;
+  resize: vertical;
+  background: transparent;
+  color: inherit;
+  border: none;
+  outline: none;
+  padding: 20px;
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+
+.delete-btn {
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+.delete-btn:hover {
+  border-color: rgba(239, 68, 68, 0.8);
+}
